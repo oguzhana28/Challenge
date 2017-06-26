@@ -20,4 +20,6 @@
         if  (strlen(trim($message))>0 ) { 
             echo "<div style='color:red'>" . $message . "</div>"; 
         }
-    }
+    }?>
+
+          
