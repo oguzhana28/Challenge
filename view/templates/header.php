@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Barbershop</title>
+	<title>kapperzaak</title>
 	<link rel="stylesheet" href="<?= URL ?>/css/style.css">
 
 	<!-- Bootstrap includes -->
@@ -18,7 +18,7 @@
 
 			<!-- Logo -->
 			<div class="navbar-header">
-				<a href="<?= URL ?>Barber/index" class="navbar-brand">Chop chop gas d'r op</a>
+				<a href="<?= URL ?>Barber/index" class="navbar-brand">kapperzaak</a>
 			</div>
 
 			<!-- Menu Items -->
