@@ -1,30 +1,33 @@
 <?php
-
-function register(){
+function registerDB(){
     $db = openDatabaseConnection();
-    
-    $Naam = isset($_POST['Naam']) ? $_POST['Naam'] : '';
-	$Adres = isset($_POST['Adres']) ? $_POST['Adres'] : '';
-	$Postcode = isset($_POST['Postcode']) ? $_POST['Postcode'] : '';
-    $Plaats = isset($_POST['Plaats']) ? $_POST['Plaats'] : '';
-	$Telefoon = isset($_POST['Telefoon']) ? $_POST['Telefoon'] : '';
-	$Mobiel = isset($_POST['Mobiel']) ? $_POST['Mobiel'] : '';
+
+    $Name = isset($_POST['Name']) ? $_POST['Name'] : '';
+	$Adress = isset($_POST['Adress']) ? $_POST['Adress'] : '';
+	$PostalCode = isset($_POST['PostalCode']) ? $_POST['PostalCode'] : '';
+    $City = isset($_POST['City']) ? $_POST['City'] : '';
+	$Phone = isset($_POST['Phone']) ? $_POST['Phone'] : '';
+	$Cell = isset($_POST['Cell']) ? $_POST['Cell'] : '';
     $Email = isset($_POST['Email']) ? $_POST['Email'] : '';
 	$Password = isset($_POST['Password']) ? $_POST['Password'] : '';
-	
-    if (strlen($Naam) == 0 || strlen($Adres) == 0 || strlen($Postcode) == 0 || strlen($Plaats) == 0 || strlen($Telefoon) == 0 || strlen($Mobiel) == 0 || strlen($Email) == 0 || strlen($Password) == 0) {
-		return "niet alle velden zijn correct ingevuld";
+	$isBarberer = isset($_POST['isBarberer']) ? $_POST['isBarberer'] : '0';
+
+    // Hash the password
+    $Password = hash('sha256', $Password);
+    if (!isset($Name) && !isset($Adress) && !isset($PostalCode) && !isset($City) && !isset($Phone) && !isset($Cell) && !isset($Email) && !isset($Password) && !isset($isBarberer)) {
+		return "Not all fields have been filled in properly";
 	}
-	
-	$sql = "INSERT INTO Register(Naam, Adres, Postcode, Plaats, Telefoon, Mobiel, Email,Password) VALUES (:Naam, :Adres, :Postcode, :Plaats, :Telefoon,:Mobiel,:Email, :Password)";
+	$sql = "INSERT INTO users (Name, Adress, PostalCode, City, Phone, Cell, Email, Password, isBarberer) VALUES (:Name, :Adress, :PostalCode, :City, :Phone, :Cell, :Email, :Password, :isBarberer)";
 	$query = $db->prepare($sql);
 	$query->execute(array(
-		':Naam' => $Naam,
-		':Adres' => $Adres,
-        ':Postcode' => $Postcode,
-        ':Plaats' => $Plaats,
-        ':Telefoon' => $Telefoon,
-        ':Mobiel' => $Mobiel,
+		':Name' => $Name,
+		':Adress' => $Adress,
+        ':PostalCode' => $PostalCode,
+        ':City' => $City,
+        ':Phone' => $Phone,
+        ':Cell' => $Cell,
         ':Email' => $Email,
-        ':Password' => $Password));
+        ':Password' => $Password,
+        'isBarberer' => $isBarberer
+    ));
 }

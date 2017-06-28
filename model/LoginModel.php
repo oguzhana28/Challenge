@@ -1,32 +1,41 @@
 <?php
-
-function loginUser(){
+function loginUserDB(){
     $_SESSION['loggedIn'] = 0;
     $db = openDatabaseConnection();
-    
+
     $Password = $_POST['Password'];
     $Email = $_POST['Email'];
-    
-    $sql = "SELECT * FROM Register where Email=:email";
-    $stmt = $db->prepare( $sql); 
-    $stmt->execute(array(':email' => $Email)); 
+
+    // Make the password compatible with the one in the database
+    $Password = hash('sha256', $Password);
+
+    $sql = "SELECT * FROM users where Email=:Email";
+    $stmt = $db->prepare( $sql);
+    $stmt->execute(array(':Email' => $Email));
     $user = $stmt->fetch();
-    var_dump($user);
-        
-    if(!empty($user['Naam'])){
-        
-        $Naam = $user['Naam'];
-        $_SESSION['Naam'] = $Naam;
-        
-        $email = $user['email'];
-        $_SESSION['email'] = $email;
-        
+
+    if(!empty($user['Name'])){
+
+        $Name = $user['Name'];
+        $_SESSION['Username'] = $Name;
+
+        $Email = $user['Email'];
+        $_SESSION['Email'] = $Email;
+
         //Set session logged in
         $_SESSION['loggedIn'] = 1;
     }
-    if($user != null){    
+    
+    if($user['isBarberer'] == 1){
+        $_SESSION['isBarberer'] = 1;
+    } else {
+        $_SESSION['isBarberer'] = 0;
+    }
+
+    if($user != null){
         if($Password == $user['Password']){
-            header("Location:" . URL . "Home/index");
+            $_SESSION['id'] = $user['Id'];
+            header("Location:" . URL . "Barber/index");
         }else{
         echo "This password does not exist. Please try again.";
         }

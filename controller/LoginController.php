@@ -2,25 +2,27 @@
 include_once('../model/RegisterModel.php');
 include_once('../model/LoginModel.php');
 
-function loginIndex()
-{
-	render("login/indexlogin");	
-}
-function login()
-{
-	loginUser();
+function index(){
+	render("login/index");
 }
 
-function registerSave()
-{              
+function register(){
+    render("login/register");
+}
+
+function login(){
+	loginUserDB();
+}
+
+function registerSave(){
      if ($_SERVER["REQUEST_METHOD"] == "POST"){
-         register();
+         registerDB();
     }
- header("Location:" . URL . "login/loginIndex");
-     var_dump($_POST);
+ header("Location:" . URL . "login/index");
 }
 
 function logout(){
     session_destroy();
-    header("Location:" . URL . "home/index");
+    $_SESSION['loggedIn'] = 0;
+    header("Location:" . URL . "Barber/index");
 }
