@@ -1,4 +1,7 @@
                         <hr>
+                        <?php
+                            var_dump($_SESSION['Id']);
+                        ?>
                         <footer>
                             <h2>Openingstijden</h2>
                             <p>
@@ -18,7 +21,7 @@
                                 <span class="day-hours">08:30 - 15:10</span>
                                 <br>
                             </p>
-                        </footer>            
+                        </footer>
                 </div>
             </div>
         </div>

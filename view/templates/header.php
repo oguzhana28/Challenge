@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>kapperzaak</title>
+	<title>Barbershop</title>
 	<link rel="stylesheet" href="<?= URL ?>/css/style.css">
 
 	<!-- Bootstrap includes -->
@@ -18,7 +18,7 @@
 
 			<!-- Logo -->
 			<div class="navbar-header">
-				<a href="<?= URL ?>Barber/index" class="navbar-brand">kapperzaak</a>
+				<a href="<?= URL ?>Barber/index" class="navbar-brand">Chop chop gas d'r op</a>
 			</div>
 
 			<!-- Menu Items -->
@@ -39,8 +39,6 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $_SESSION['Username'] ?> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="<?= URL ?>Barber/account">Account</a></li>
-							<li><a href="<?= URL ?>Barber/afspraken">Mijn Afspraken</a></li>
 							<li><a href="<?= URL ?>Login/logout">Logout</a></li>
 						</ul>
 					</li>

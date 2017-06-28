@@ -15,6 +15,7 @@ function loginUserDB(){
     $user = $stmt->fetch();
 
     if(!empty($user['Name'])){
+        $Id = $user['Id'];
 
         $Name = $user['Name'];
         $_SESSION['Username'] = $Name;
@@ -24,17 +25,18 @@ function loginUserDB(){
 
         //Set session logged in
         $_SESSION['loggedIn'] = 1;
-    }
-    
-    if($user['isBarberer'] == 1){
-        $_SESSION['isBarberer'] = 1;
-    } else {
-        $_SESSION['isBarberer'] = 0;
+
+
+        if($user['isBarberer'] == 1){
+            $_SESSION['isBarberer'] = 1;
+        } else {
+            $_SESSION['isBarberer'] = 0;
+        }
     }
 
     if($user != null){
         if($Password == $user['Password']){
-            $_SESSION['id'] = $user['Id'];
+            $_SESSION['Id'] = $user['Id'];
             header("Location:" . URL . "Barber/index");
         }else{
         echo "This password does not exist. Please try again.";
